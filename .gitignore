@@ -1,1 +1,8 @@
 target
+
+# libraries should ignore Cargo.lock
+Cargo.lock
+
+# binaries/applications should check-in Cargo.lock
+!/noise-proxy/Cargo.lock
+!/stratum-proxy/Cargo.lock
