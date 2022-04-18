@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/coins/bitcoin/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/coins/bitcoin/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/noise-proxy/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/protocols/stratum/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/protocols/stratum/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/protocols/wire/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/stratum-proxy/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/stratum-proxy/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/utils-rs/async-utils/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/stratum-proxy/target" />
+      <excludeFolder url="file://$MODULE_DIR$/protocols/stratum/target" />
+      <excludeFolder url="file://$MODULE_DIR$/coins/target" />
+      <excludeFolder url="file://$MODULE_DIR$/noise-proxy/target" />
+      <excludeFolder url="file://$MODULE_DIR$/utils-rs/async-utils/target" />
+      <excludeFolder url="file://$MODULE_DIR$/protocols/wire/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

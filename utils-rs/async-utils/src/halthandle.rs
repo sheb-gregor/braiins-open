@@ -29,9 +29,6 @@ use std::task::{Context, Poll};
 use std::time::Duration;
 
 use futures::prelude::*;
-
-pub use tokio12 as tokio;
-
 use tokio::sync::{mpsc, watch, Notify};
 use tokio::task::{JoinError, JoinHandle};
 use tokio::time;

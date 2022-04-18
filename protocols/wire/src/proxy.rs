@@ -25,8 +25,6 @@
 use std::convert::TryInto;
 use std::net::SocketAddr;
 
-use crate::{bytes, tokio, tokio_util};
-
 use bytes::Buf;
 use bytes::BytesMut;
 use futures::{Future, FutureExt, StreamExt};

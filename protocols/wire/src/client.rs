@@ -31,13 +31,7 @@ use std::vec;
 use crate::tokio;
 
 use tokio::net::TcpStream;
-#[cfg(any(feature = "tokio12", feature = "tokio03"))]
 use tokio::time;
-
-#[cfg(feature = "tokio02")]
-mod time {
-    pub use super::tokio::time::delay_for as sleep;
-}
 
 #[cfg(feature = "serde")]
 use serde::{de, ser};
@@ -145,8 +139,8 @@ impl fmt::Display for Address {
 #[cfg(feature = "serde")]
 impl ser::Serialize for Address {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: ser::Serializer,
+        where
+            S: ser::Serializer,
     {
         serializer.collect_str(self)
     }
@@ -155,8 +149,8 @@ impl ser::Serialize for Address {
 #[cfg(feature = "serde")]
 impl<'de> de::Deserialize<'de> for Address {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: de::Deserializer<'de>,
+        where
+            D: de::Deserializer<'de>,
     {
         let s: &str = de::Deserialize::deserialize(deserializer)?;
         Self::try_from(s).map_err(de::Error::custom)
@@ -299,8 +293,8 @@ impl Client {
     /// Create a new `Client` that will connecto to `addr` with
     /// the supplied backoff.
     pub fn with_backoff<B>(addr: Address, backoff: B) -> Self
-    where
-        B: Backoff + 'static,
+        where
+            B: Backoff + 'static,
     {
         Self {
             addr,

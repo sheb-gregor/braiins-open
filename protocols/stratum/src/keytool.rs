@@ -28,7 +28,6 @@
 use anyhow::{anyhow, Context, Result};
 use ii_stratum::v2::noise;
 use ii_stratum::v2::noise::auth::{ServerSecurityBundle, StaticPublicKeyFormat};
-use rand::rngs::OsRng;
 use std::convert::{TryFrom, TryInto};
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
@@ -79,8 +78,10 @@ impl GenCAKeyCommand {
     fn execute(self) -> Result<()> {
         print!("Generating ED25519 keypair...");
 
-        let mut csprng = OsRng {};
-        let keypair = ed25519_dalek::Keypair::generate(&mut csprng);
+        use rand::rngs::OsRng;
+        use ed25519_dalek::Keypair;
+        let mut csprng = OsRng{};
+        let keypair: Keypair = Keypair::generate(&mut csprng);
 
         write_to_file(
             &self.public_key_file,
@@ -123,7 +124,7 @@ impl GenNoiseKeyCommand {
         print!("Generating static ('s') keypair for Noise handshake ...");
 
         let keypair = noise::generate_keypair()
-            .map_err(|e| anyhow!("Cannot generate noise keypair {}", e))?;
+            .map_err(|e| anyhow!("Cannot generate noise keypair {:?}", e))?;
 
         write_to_file(
             &self.public_key_file,
@@ -223,14 +224,14 @@ impl SignBundleCommand {
         let header = noise::auth::SignedPartHeader::with_duration(Duration::from_secs(
             (self.valid_for_days * 24 * 60 * 60) as u64,
         ))
-        .map_err(|e| anyhow!("{}", e))?;
+        .map_err(|e| anyhow!("{:?}", e))?;
 
         let signed_part =
             noise::auth::SignedPart::new(header, public_key.into_inner(), authority_keypair.public);
 
         let signature = signed_part
             .sign_with(&authority_keypair)
-            .map_err(|e| anyhow!("{}", e))
+            .map_err(|e| anyhow!("{:?}", e))
             .context("Signing certificate")?;
 
         // Final step is to compose the certificate from all components and serialize it into a file
@@ -320,14 +321,14 @@ impl SignKeyCommand {
         let header = noise::auth::SignedPartHeader::with_duration(Duration::from_secs(
             (self.valid_for_days * 24 * 60 * 60) as u64,
         ))
-        .map_err(|e| anyhow!("{}", e))?;
+        .map_err(|e| anyhow!("{:?}", e))?;
 
         let signed_part =
             noise::auth::SignedPart::new(header, public_key.into_inner(), authority_keypair.public);
 
         let signature = signed_part
             .sign_with(&authority_keypair)
-            .map_err(|e| anyhow!("{}", e))
+            .map_err(|e| anyhow!("{:?}", e))
             .context("Signing certificate")?;
 
         // Final step is to compose the certificate from all components and serialize it into a file

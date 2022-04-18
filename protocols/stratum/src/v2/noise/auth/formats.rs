@@ -28,7 +28,6 @@ use std::convert::TryFrom;
 use std::fmt;
 use std::time::SystemTime;
 
-use ed25519_dalek::ed25519::signature::Signature;
 use tokio::net::TcpStream;
 use tokio_util::codec::{Decoder, Encoder, Framed};
 

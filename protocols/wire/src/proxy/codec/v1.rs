@@ -26,8 +26,6 @@ use std::str::FromStr;
 use super::{ProxyInfo, SocketType, MAX_HEADER_SIZE};
 use crate::proxy::error::{Error, Result};
 
-use crate::{bytes, tokio_util};
-
 use bytes::{Buf, BufMut, BytesMut};
 use tokio_util::codec::{Decoder, Encoder};
 
@@ -184,7 +182,6 @@ impl Encoder<ProxyInfo> for V1Codec {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{bytes, tokio};
     use bytes::{BufMut, BytesMut};
     use futures::StreamExt;
     use tokio::io::{AsyncRead, AsyncWrite};

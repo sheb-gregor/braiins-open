@@ -100,10 +100,7 @@ mod test {
     use super::*;
 
     use futures::future;
-    #[cfg(feature = "tokio02")]
-    use tokio02 as tokio;
-    #[cfg(feature = "tokio12")]
-    use tokio12 as tokio;
+    use tokio;
 
     #[tokio::test]
     async fn maybe_future() {

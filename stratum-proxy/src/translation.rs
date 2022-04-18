@@ -83,7 +83,7 @@ pub struct V2ToV1TranslationOptions {
     /// connection. This can be useful for V2 clients that run this translation component locally
     pub propagate_reconnect_downstream: bool,
     // cannot use String here because of Copy trait requirement
-    pub password: arrayvec::ArrayString<[u8; Self::MAX_V1_PASSWORD_SIZE]>,
+    pub password: arrayvec::ArrayString<{ Self::MAX_V1_PASSWORD_SIZE }>,
 }
 
 impl V2ToV1TranslationOptions {
@@ -94,7 +94,7 @@ impl V2ToV1TranslationOptions {
         propagate_reconnect_downstream: bool,
         v1_password: &str,
     ) -> Self {
-        let mut password = arrayvec::ArrayString::<[u8; Self::MAX_V1_PASSWORD_SIZE]>::new();
+        let mut password = arrayvec::ArrayString::<{ Self::MAX_V1_PASSWORD_SIZE }>::new();
         password.push_str(v1_password);
         Self {
             try_enable_xnsub,
@@ -1293,7 +1293,7 @@ impl V2ToV1Translation {
         // Propagate the reconnect only if configured so
         if self.options.propagate_reconnect_downstream {
             let (new_host, new_port) = Self::parse_client_reconnect(&msg)
-                .map_err(|e| Error::General(format!("visit_client_reconnect failed: {}", e)))?;
+                .map_err(|e| Error::General(format!("visit_client_reconnect failed: {:?}", e)))?;
 
             self.submit_v2_message(v2::messages::Reconnect { new_host, new_port })?;
         }

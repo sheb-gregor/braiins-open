@@ -25,8 +25,6 @@ use std::net::SocketAddr;
 use super::{ProxyInfo, SocketType};
 use crate::proxy::error::{Error, Result};
 
-use crate::{bytes, tokio_util};
-
 use bytes::BytesMut;
 use proto::*;
 use tokio_util::codec::{Decoder, Encoder};
@@ -155,7 +153,6 @@ impl Encoder<ProxyInfo> for V2Codec {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{bytes, tokio, tokio_util};
     use bytes::BufMut;
     use futures::StreamExt;
     use tokio::io::{AsyncRead, AsyncWrite};

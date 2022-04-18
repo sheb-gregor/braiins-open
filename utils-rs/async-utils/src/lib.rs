@@ -22,29 +22,8 @@
 
 //! Async utilities
 
-#[cfg(all(feature = "tokio03", feature = "tokio02"))]
-compile_error!("You can't use both Tokio 0.3 and 0.2. Note: The `tokio02` feature requires default features to be turned off");
-
-#[cfg(all(feature = "tokio12", feature = "tokio02"))]
-compile_error!("You can't use both Tokio 1.2 and 0.2. Note: The `tokio02` feature requires default features to be turned off");
-
-#[cfg(all(feature = "tokio12", feature = "tokio03"))]
-compile_error!("You can't use both Tokio 1.2 and 0.3. Note: The `tokio02` feature requires default features to be turned off");
-
-#[cfg(feature = "tokio12")]
 mod halthandle;
-#[cfg(feature = "tokio12")]
 pub use halthandle::*;
-
-#[cfg(feature = "tokio03")]
-mod halthandle03;
-#[cfg(feature = "tokio03")]
-pub use halthandle03::*;
-
-#[cfg(feature = "tokio02")]
-mod halthandle02;
-#[cfg(feature = "tokio02")]
-pub use halthandle02::*;
 
 mod maybe_future;
 pub use maybe_future::MaybeFuture;

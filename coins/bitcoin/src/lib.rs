@@ -86,7 +86,7 @@ impl BlockHeader {
     /// Get binary representation of Bitcoin block header
     #[inline]
     pub fn into_bytes(self) -> [u8; BLOCK_HEADER_SIZE] {
-        self.pack()
+        self.pack().unwrap() // todo: remove unwrap
     }
 
     /// Compute SHA256 double hash
